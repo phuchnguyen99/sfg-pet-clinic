@@ -15,10 +15,10 @@ public class DataLoader implements CommandLineRunner
     private final OwnerService ownerService;
     private final VetService vetService;
 
-    public DataLoader()
+    public DataLoader(final OwnerService ownerService, final VetService vetService)
     {
-        ownerService = new OwnerServiceMap();
-        vetService = new VetServiceMap();
+        this.ownerService = ownerService;
+        this.vetService = vetService;
     }
     @Override
     public void run(final String... args)
