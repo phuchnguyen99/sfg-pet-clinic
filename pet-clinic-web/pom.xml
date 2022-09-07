@@ -11,18 +11,10 @@
 
     <artifactId>pet-clinic-web</artifactId>
     <properties>
-        <webjars-coffee-script.version>1.11.0</webjars-coffee-script.version>
-        <webjars-domelementtype.version>2.0.1</webjars-domelementtype.version>
-        <webjars-entities.version>2.1.0</webjars-entities.version>
-        <webjars-envjs.version>1.2</webjars-envjs.version>
-        <webjars-font-awesome.version>5.15.1</webjars-font-awesome.version>
-        <webjars-handlebars.version>4.7.6</webjars-handlebars.version>
-        <webjars-jquery.version>3.5.1</webjars-jquery.version>
-        <webjars-jshint.version>2.11.0</webjars-jshint.version>
-        <webjars-jslint.version>20140708-394bf29</webjars-jslint.version>
-        <webjars-json2.version>20140204</webjars-json2.version>
-        <webjars-less.version>1.3.3</webjars-less.version>
-        <webjars-locator.version>0.40</webjars-locator.version>
+        <webjars-bootstrap.version>3.3.6</webjars-bootstrap.version>
+        <webjars-jquery-ui.version>1.11.4</webjars-jquery-ui.version>
+        <webjars-jquery.verion>2.2.4</webjars-jquery.verion>
+        <wro4j.version>1.8.0</wro4j.version>
     </properties>
     <dependencies>
         <dependency>
@@ -53,99 +45,57 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>webjars-locator-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>jquery</artifactId>
+            <version>${webjars-jquery.verion}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>jquery-ui</artifactId>
+            <version>${webjars-jquery-ui.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>bootstrap</artifactId>
+            <version>${webjars-bootstrap.version}</version>
+        </dependency>
     </dependencies>
-    <dependencyManagement>
-        <dependencies>
-            <!-- Webjars -->
-            <dependency>
-                <groupId>org.webjars</groupId>
-                <artifactId>coffee-script</artifactId>
-                <version>${webjars-coffee-script.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.webjars.npm</groupId>
-                <artifactId>domelementtype</artifactId>
-                <version>${webjars-domelementtype.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.webjars.npm</groupId>
-                <artifactId>entities</artifactId>
-                <version>${webjars-entities.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.webjars</groupId>
-                <artifactId>envjs</artifactId>
-                <version>${webjars-envjs.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.webjars</groupId>
-                <artifactId>font-awesome</artifactId>
-                <version>${webjars-font-awesome.version}</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.webjars.npm</groupId>
-                <artifactId>handlebars</artifactId>
-                <version>${webjars-handlebars.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.webjars</groupId>
-                <artifactId>jquery</artifactId>
-                <version>${webjars-jquery.version}</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.webjars.npm</groupId>
-                <artifactId>jshint</artifactId>
-                <version>${webjars-jshint.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>org.webjars.npm</groupId>
-                        <artifactId>domelementtype</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>org.webjars.npm</groupId>
-                        <artifactId>entities</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <dependency>
-                <groupId>org.webjars</groupId>
-                <artifactId>jslint</artifactId>
-                <version>${webjars-jslint.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.webjars</groupId>
-                <artifactId>json2</artifactId>
-                <version>${webjars-json2.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.webjars</groupId>
-                <artifactId>less</artifactId>
-                <version>${webjars-less.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>org.webjars.npm</groupId>
-                        <artifactId>source-map</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <dependency>
-                <groupId>org.webjars</groupId>
-                <artifactId>webjars-locator</artifactId>
-                <version>${webjars-locator.version}</version>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
 
     <build>
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-release-plugin</artifactId>
+                <groupId>ro.isdc.wro4j</groupId>
+                <artifactId>wro4j-maven-plugin</artifactId>
+                <version>${wro4j.version}</version>
+                <executions>
+                    <execution>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
                 <configuration>
-                    <tagBase>http://github.com/wro4j/wro4j/tree/</tagBase>
+                    <cssDestinationFolder>${project.build.directory}/classes/static/resources/css</cssDestinationFolder>
+                    <jsDestinationFolder>${project.build.directory}/classes/static/resources/js</jsDestinationFolder>
+                    <contextFolder>${basedir}/src/main/less</contextFolder>
+                    <wroFile>${basedir}/src/main/wro/wro.xml</wroFile>
+                    <extraConfigFile>${basedir}/src/main/wro/wro.properties</extraConfigFile>
+                    <wroManagerFactory>ro.isdc.wro.maven.plugin.manager.factory.ConfigurableWroManagerFactory</wroManagerFactory>
+                    <ignoreMissingResources>false</ignoreMissingResources>
                 </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.webjars</groupId>
+                        <artifactId>bootstrap</artifactId>
+                        <version>${webjars-bootstrap.version}</version>
+                    </dependency>
+                </dependencies>
             </plugin>
         </plugins>
     </build>
