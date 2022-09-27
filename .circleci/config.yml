@@ -10,7 +10,7 @@ jobs:
         MAVEN_OPTS: ~XmX3200m
     steps:
     - checkout
-    - run: echo "this is the build job"
+    - run: mvn dependency:go-offline
   test:
     docker:
     - image: circleci/openjdk:8-jdk
