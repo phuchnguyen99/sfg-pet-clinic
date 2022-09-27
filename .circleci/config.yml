@@ -9,6 +9,7 @@ jobs:
     environment:
         MAVEN_OPTS: ~XmX3200m
     steps:
+    - checkout
     - restore_cache:
         - v1-dependencies-({checksum "pom.xml"})
         - v1-dependencies-
