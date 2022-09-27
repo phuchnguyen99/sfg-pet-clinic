@@ -1,31 +1,88 @@
-version: 2.1
+  Skip to content
+    Search or jump to…
+    Pull requests
+    Issues
+    Marketplace
+    Explore
 
-# Define the jobs we want to run for this project
-jobs:
-  build:
-    docker:
-    - image: circleci/openjdk:8-jdk
-    working_directory: ~/repo
-    environment:
-        MAVEN_OPTS: ~Xmx3200m
-    steps:
-    - checkout
-#    - restore-cache:
-#        keys:
-#          - v1-dependencies-({checksum : "pom.xml"})
-#          - v1-dependencies-
-    - run: mvn install
-    - run: mvn dependency:go-offline
-  test:
-    docker:
-    - image: circleci/openjdk:8-jdk
-    steps:
-    - checkout
-    - run: integration-test
+    @phuchnguyen99
+    springframeworkguru
+    /
+    sfg-pet-clinic
+    Public
+    Code
+    Issues
+    43
+    Pull requests
+    26
+    Actions
+    Projects
+    Security
+    Insights
+    sfg-pet-clinic/.circleci/config.yml
+    @krzysztof83
+    krzysztof83 Merge branch 'master' into master
+    Latest commit de3babd on Nov 20, 2018
+    History
+    2 contributors
+    @krzysztof83@springframeworkguru
+    43 lines (34 sloc)  1.16 KB
 
-# Orchestrate our job run sequence
-workflows:
-  build_and_test:
-    jobs:
-    - build
-    - test
+  # Java Maven CircleCI 2.0 configuration file
+  #
+  # Check https://circleci.com/docs/2.0/language-java/ for more details
+  #
+  version: 2
+  jobs:
+    build:
+      docker:
+      # specify the version you desire here
+      - image: circleci/openjdk:11-browsers-legacy
+
+      # Specify service dependencies here if necessary
+      # CircleCI maintains a library of pre-built images
+      # documented at https://circleci.com/docs/2.0/circleci-images/
+      # - image: circleci/postgres:9.4
+
+      working_directory: ~/repo
+
+      environment:
+        # Customize the JVM maximum heap limit
+        MAVEN_OPTS: -Xmx3200m
+
+      steps:
+      - checkout
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "pom.xml" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+
+      - run: mvn install -DskipTests
+
+      - run: mvn dependency:go-offline
+
+      - save_cache:
+          paths:
+          - ~/.m2
+          key: v1-dependencies-{{ checksum "pom.xml" }}
+
+      # run tests!
+      - run: mvn integration-test
+    Footer
+    © 2022 GitHub, Inc.
+    Footer navigation
+    Terms
+    Privacy
+    Security
+    Status
+    Docs
+    Contact GitHub
+    Pricing
+    API
+    Training
+    Blog
+    About
+    sfg-pet-clinic/config.yml at master · springframeworkguru/sfg-pet-clinic
