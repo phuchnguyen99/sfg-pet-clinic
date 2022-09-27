@@ -1,37 +1,4 @@
-  Skip to content
-    Search or jump to…
-    Pull requests
-    Issues
-    Marketplace
-    Explore
-
-    @phuchnguyen99
-    springframeworkguru
-    /
-    sfg-pet-clinic
-    Public
-    Code
-    Issues
-    43
-    Pull requests
-    26
-    Actions
-    Projects
-    Security
-    Insights
-    sfg-pet-clinic/.circleci/config.yml
-    @krzysztof83
-    krzysztof83 Merge branch 'master' into master
-    Latest commit de3babd on Nov 20, 2018
-    History
-    2 contributors
-    @krzysztof83@springframeworkguru
-    43 lines (34 sloc)  1.16 KB
-
-  # Java Maven CircleCI 2.0 configuration file
-  #
-  # Check https://circleci.com/docs/2.0/language-java/ for more details
-  #
+  version: 2.1
   jobs:
     build:
       docker:
