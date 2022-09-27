@@ -10,7 +10,11 @@ jobs:
         MAVEN_OPTS: ~Xmx3200m
     steps:
     - checkout
-    - mvn install -DskipTests
+    - restore-cache:
+        keys:
+          - v1-dependencies-({checksum : "pom.xml"})
+          - v1-dependencies-
+    - run mvn install -DskipTests
     - run: mvn dependency:go-offline
   test:
     docker:
