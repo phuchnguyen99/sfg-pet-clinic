@@ -81,7 +81,8 @@ public class PetController
             return VIEWS_PETS_CREATE_OR_UPDATE_FORM;
         }
         petService.save(pet);
-        return "redirect:/owners/" + owner.getId();
+        Owner savedOwner = ownerService.save(owner);
+        return "redirect:/owners/" + savedOwner.getId();
     }
 
     @GetMapping("/pets/{petId}/edit")
